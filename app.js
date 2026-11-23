@@ -108,7 +108,7 @@
     $('customer-name').focus({preventScroll:true});
   }
   document.querySelectorAll('[data-order]').forEach((button) => button.addEventListener('click', () => selectProduct(button.dataset.order)));
-  document.querySelector('[data-consult]').addEventListener('click', () => selectProduct('Консультація щодо підбору догляду'));
+  document.querySelectorAll('[data-consult]').forEach((link) => link.addEventListener('click', () => selectProduct('Консультація щодо підбору догляду')));
   document.querySelectorAll('[data-details]').forEach((button) => button.addEventListener('click', () => {
     const info = JSON.parse(button.closest('.product').dataset.info);
     detailProduct = `${info.brand} · ${info.name}`;
@@ -119,6 +119,7 @@
     $('detail-volume').textContent = info.volume;
     $('detail-ph').textContent = info.ph;
     $('detail-ph-row').hidden = !info.ph;
+    $('detail-image').parentElement.classList.toggle('is-studio', Boolean(info.studio));
     $('detail-image').src = `assets/${info.image}`;
     $('detail-image').alt = `${info.brand} ${info.name}`;
     openDialog($('product-dialog'));
